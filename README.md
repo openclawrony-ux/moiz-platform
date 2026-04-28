@@ -1,46 +1,53 @@
 # moiz-platform
 
-Primary repository for Moiz. This is the v0 engineering substrate — the place every future code change lives, gets reviewed, and gets shipped from.
+Primary repository for Moiz. The first product on this substrate is **Specsmith** — a tool that turns rough product notes into a tight, reviewable engineering spec.
 
-## Get to a green build in one command
+## Get to a running app in one command
 
 Requires Node.js 20+ and [pnpm](https://pnpm.io/) 9+.
 
 ```bash
-pnpm install && pnpm verify
+pnpm install && pnpm dev
 ```
 
-`pnpm verify` runs lint, typecheck, tests, and a production build. CI on every PR runs the same thing.
+Open http://localhost:3000 — you should see the Specsmith landing page with the paste form.
+
+## Specsmith (this app)
+
+Single-app layout at the repo root. The skeleton lives in:
+
+| Path                    | What it is                                                                         |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| `app/layout.tsx`        | Root layout, global styles, metadata                                               |
+| `app/page.tsx`          | Landing page — hero, paste form (no submit handler yet), "what is this" explainer  |
+| `app/(landing)/copy.ts` | Landing copy externalized so it can be edited without touching layout              |
+| `app/globals.css`       | Tailwind entry + base styles                                                       |
+| `lib/llm/provider.ts`   | `LLMProvider` interface stub. Implementation lands with the `/api/generate` issue. |
+
+The landing page is intentionally a v0 stub. The paste form has no submit handler — generation lands in a follow-up issue.
 
 ## Daily workflow
 
-| Command             | What it does                         |
-| ------------------- | ------------------------------------ |
-| `pnpm dev`          | Start the local dev server (Vite)    |
-| `pnpm test`         | Run unit tests once (Vitest)         |
-| `pnpm test:watch`   | Run unit tests in watch mode         |
-| `pnpm lint`         | Lint with ESLint                     |
-| `pnpm format`       | Check formatting (Prettier)          |
-| `pnpm format:write` | Apply formatting fixes               |
-| `pnpm typecheck`    | Run `tsc` in noEmit mode             |
-| `pnpm build`        | Production build (output in `dist/`) |
-| `pnpm preview`      | Serve the production build locally   |
-| `pnpm verify`       | Lint + typecheck + test + build      |
+| Command             | What it does                                               |
+| ------------------- | ---------------------------------------------------------- |
+| `pnpm dev`          | Start the Next.js dev server on `http://localhost:3000`    |
+| `pnpm build`        | Production build (`.next/`)                                |
+| `pnpm start`        | Serve the production build on `http://localhost:3000`      |
+| `pnpm lint`         | Lint with ESLint (Next.js core-web-vitals + TypeScript)    |
+| `pnpm format`       | Check formatting (Prettier)                                |
+| `pnpm format:write` | Apply formatting fixes                                     |
+| `pnpm typecheck`    | Run `tsc --noEmit`                                         |
+| `pnpm verify`       | Lint + format + typecheck + build (CI runs the same thing) |
 
 ## Stack
 
+- Next.js 15 (App Router)
+- React 18 + TypeScript
+- Tailwind CSS 4
+- ESLint 9 + Prettier 3
+- pnpm 9, Node.js 20+
+
 See [`docs/STACK.md`](./docs/STACK.md) for the full baseline decision and trade-offs.
-
-Short version: TypeScript, React 18, Vite, Vitest, ESLint, Prettier. Static SPA, deployable anywhere; today it ships to GitHub Pages.
-
-## Environments
-
-| Environment | Where it runs                                                |
-| ----------- | ------------------------------------------------------------ |
-| Local dev   | `pnpm dev` on your machine                                   |
-| Production  | GitHub Pages, deployed automatically on every push to `main` |
-
-Preview environments per-PR are intentionally **not** wired up in v0 to avoid cloud-credential gating. The GitHub Pages deploy is sufficient as the v0 deploy target. We will revisit when product scope warrants it.
 
 ## Branching and merging
 
@@ -56,6 +63,12 @@ Preview environments per-PR are intentionally **not** wired up in v0 to avoid cl
 3. Push and open a PR.
 4. Wait for CI to go green. Self-review or request a teammate.
 5. Squash-merge.
+
+Every commit must end with the trailer:
+
+```
+Co-Authored-By: Paperclip <noreply@paperclip.ing>
+```
 
 ## License
 

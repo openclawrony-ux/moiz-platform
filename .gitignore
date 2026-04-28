@@ -1,9 +1,11 @@
 node_modules
-dist
+.next
+out
 coverage
 .DS_Store
 *.log
 .env
 .env.local
-.vite
+.env.*.local
 *.tsbuildinfo
+next-env.d.ts
