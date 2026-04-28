@@ -26,8 +26,7 @@ export default function MoiLandingStub() {
           <Link href="/" className="underline underline-offset-4">
             Specsmith
           </Link>
-          , a tool that turns rough product notes into a tight engineering
-          spec.
+          , a tool that turns rough product notes into a tight engineering spec.
         </p>
       </section>
       <footer className="mt-auto pt-8 text-xs text-slate-500 dark:text-slate-400">

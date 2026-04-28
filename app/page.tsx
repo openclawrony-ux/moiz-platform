@@ -23,6 +23,20 @@ export default function LandingPage() {
         <p className="max-w-2xl text-lg text-slate-600 dark:text-slate-300">
           {hero.subtitle}
         </p>
+        <nav className="flex gap-2 text-sm font-medium" aria-label="Modes">
+          <span
+            aria-current="page"
+            className="rounded-full border border-slate-900 bg-slate-900 px-3 py-1 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-slate-900"
+          >
+            Generate
+          </span>
+          <Link
+            href="/lint"
+            className="rounded-full border border-slate-200 px-3 py-1 text-slate-600 transition hover:border-slate-400 dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-500"
+          >
+            Lint a draft
+          </Link>
+        </nav>
       </section>
 
       <section
