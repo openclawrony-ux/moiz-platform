@@ -14,4 +14,11 @@ describe("App", () => {
     render(<App />);
     expect(screen.getByText(/hello, world/i)).toBeInTheDocument();
   });
+
+  it("renders the v0 footer", () => {
+    render(<App />);
+    expect(
+      screen.getByText(/shipped through the pipeline/i),
+    ).toBeInTheDocument();
+  });
 });
