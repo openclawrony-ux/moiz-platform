@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { landingCopy } from "./(landing)/copy";
 
 export default function LandingPage() {
@@ -86,8 +88,17 @@ export default function LandingPage() {
         </ul>
       </section>
 
-      <footer className="mt-auto border-t border-slate-200 pt-6 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400">
-        {footer.note}
+      <footer className="mt-auto flex flex-col gap-2 border-t border-slate-200 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:border-slate-800 dark:text-slate-400">
+        <span>{footer.note}</span>
+        <span>
+          {footer.builtBy.prefix}
+          <Link
+            href={footer.builtBy.href}
+            className="font-medium underline underline-offset-4"
+          >
+            {footer.builtBy.label}
+          </Link>
+        </span>
       </footer>
     </main>
   );

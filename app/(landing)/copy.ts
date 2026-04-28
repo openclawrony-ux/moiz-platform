@@ -26,6 +26,11 @@ export const landingCopy = {
   },
   footer: {
     note: "v0 skeleton — generated landing copy is intentionally a stub.",
+    builtBy: {
+      prefix: "Built by ",
+      label: "MOI",
+      href: "/moi",
+    },
   },
 } as const;
 
